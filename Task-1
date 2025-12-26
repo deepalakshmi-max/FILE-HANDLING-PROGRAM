@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *file;
+    char data[100];
+
+    /* CREATE & WRITE TO FILE */
+    file = fopen("internship.txt", "w");
+    if (file == NULL) {
+        printf("Error creating file!\n");
+        exit(1);
+    }
+
+    printf("Enter data to write into the file:\n");
+    fgets(data, sizeof(data), stdin);
+    fputs(data, file);
+
+    fclose(file);
+    printf("\nData written successfully.\n");
+
+    /* APPEND DATA TO FILE */
+    file = fopen("internship.txt", "a");
+    if (file == NULL) {
+        printf("Error opening file for appending!\n");
+        exit(1);
+    }
+
+    printf("\nEnter data to append into the file:\n");
+    fgets(data, sizeof(data), stdin);
+    fputs(data, file);
+
+    fclose(file);
+    printf("\nData appended successfully.\n");
+
+    /* READ DATA FROM FILE */
+    file = fopen("internship.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file for reading!\n");
+        exit(1);
+    }
+
+    printf("\nFile content:\n");
+    while (fgets(data, sizeof(data), file) != NULL) {
+        printf("%s", data);
+    }
+
+    fclose(file);
+
+    return 0;
+}
